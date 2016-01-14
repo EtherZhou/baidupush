@@ -1,0 +1,24 @@
+{
+  "name": "com.xyz.plugins.baidupush",
+  "version": "1.0.1",
+  "cordova_name": "baidupush",
+  "description": "\n    This plugin binds appId, userId, channelId of BaiduYun Push.\n    It also accepts messages pushed by BaiduYun.\n",
+  "keywords": [
+    "BaiduYun",
+    "Push"
+  ],
+  "platforms": [
+    "android",
+    "ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0.0"
+    }
+  ],
+  "Author": {
+    "name": "xyz",
+    "mail": "xuyazhou@126.com"
+  }
+}

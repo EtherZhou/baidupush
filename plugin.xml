@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.xyz.plugins.baidupush"
+        version="1.0.2">
+
+    <name>baidupush</name>
+    <description>
+        This plugin accept baidupush messages
+    </description>
+    <license>MIT</license>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/baidupush.js" name="baidupush">
+        <clobbers target="baidupush" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BaiduPush">
+                <param name="android-package" value="com.xyz.plugins.baidupush.BaiduPushPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+            <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver android:name="com.xyz.plugins.baidupush.BaiduPushMessageReceiver">
+                <intent-filter>
+                    <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+                    <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+                    <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+                </intent-filter>
+            </receiver>
+            <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver" android:process=":bdservice_v1">
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                    <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                    <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+                    <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
+                    <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                    <action android:name="android.intent.action.USER_PRESENT" />
+                    <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                    <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                </intent-filter>
+            </receiver>
+            <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver" android:process=":bdservice_v1">
+                <intent-filter>
+                    <action android:name="com.baidu.android.pushservice.action.METHOD" />
+                    <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                    <data android:scheme="package" />
+                </intent-filter>
+            </receiver>
+            <service android:exported="true" android:name="com.baidu.android.pushservice.PushService" android:process=":bdservice_v1">
+                <intent-filter>
+                    <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
+                </intent-filter>
+            </service>
+            <service android:name="com.baidu.android.pushservice.CommandService" android:exported="true" >
+            </service>
+
+        </config-file>
+
+        <source-file src="src/android/com/xyz/plugins/baidupush/BaiduPushPlugin.java" target-dir="src/com/xyz/plugins/baidupush" />
+        <source-file src="src/android/com/xyz/plugins/baidupush/BaiduPushMessageReceiver.java" target-dir="src/com/xyz/plugins/baidupush" />
+
+        <resource-file src="libs/pushservice-4.5.3.48.jar" target="libs/pushservice-4.5.3.48.jar" />
+        <resource-file src="libs/armeabi/libbdpush_V2_3.so" target="libs/armeabi/libbdpush_V2_3.so" />
+        <resource-file src="libs/armeabi-v7a/libbdpush_V2_3.so" target="libs/armeabi-v7a/libbdpush_V2_3.so" />
+        <resource-file src="libs/mips/libbdpush_V2_3.so" target="libs/mips/libbdpush_V2_3.so" />
+
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BaiduPush">
+                <param name="ios-package" value="BaiduPush"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/BaiduPush.h"/>
+        <source-file src="src/ios/BaiduPush.m"/>
+        <header-file src="src/ios/AppDelegate_BaiduPush.h" />
+        <source-file src="src/ios/AppDelegate_BaiduPush.m" />
+        <header-file src="src/ios/BPush.h"/>
+        <source-file src="src/ios/libBPush.a" framework="true"/>
+
+        <framework src="Foundation.framework"/>
+        <framework src="CoreTelephony.framework"/>
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="libz.dylib"/>
+    </platform>
+
+</plugin>
