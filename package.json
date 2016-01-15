@@ -1,5 +1,5 @@
 {
-  "name": "com.xyz.plugins.baidupush",
+  "name": "cordova-plugins-baidupush",
   "version": "1.0.1",
   "cordova_name": "baidupush",
   "description": "\n    This plugin binds appId, userId, channelId of BaiduYun Push.\n    It also accepts messages pushed by BaiduYun.\n",
