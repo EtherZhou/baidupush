@@ -14,6 +14,9 @@
     "url": "https://github.com/EtherZhou/baidupush.git"
   },
   "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
     "BaiduYun",
     "Push"
   ],
