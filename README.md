@@ -9,7 +9,7 @@ It changes Baidu Yun Push's SDK for Android and iOS to a Cordova plugin.
 
 ## How to install it?
 
-	cordova plugin add https://github.com/xyz/cordova-baidupush 
+	cordova plugin add https://github.com/EtherZhou/baidupush
 
 
 ## How to use it?
