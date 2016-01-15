@@ -1,15 +1,21 @@
 {
-  "name": "cordova-plugins-baidupush",
+  "name": "cordova-plugin-baidupush",
   "version": "1.0.1",
-  "cordova_name": "baidupush",
   "description": "\n    This plugin binds appId, userId, channelId of BaiduYun Push.\n    It also accepts messages pushed by BaiduYun.\n",
+  "cordova": {
+    "id": "cordova-plugin-baidupush",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EtherZhou/baidupush.git"
+  },
   "keywords": [
     "BaiduYun",
     "Push"
-  ],
-  "platforms": [
-    "android",
-    "ios"
   ],
   "engines": [
     {
